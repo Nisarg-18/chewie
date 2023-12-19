@@ -364,9 +364,12 @@ class _MaterialControlsState extends State<MaterialControls>
           ),
           child: Center(
               child: chewieController.isFullScreen
-                  ? const Icon(
-                      Icons.close_fullscreen_sharp,
-                      color: Colors.white,
+                  ? const RotatedBox(
+                      quarterTurns: 3,
+                      child: Icon(
+                        Icons.close_fullscreen_sharp,
+                        color: Colors.white,
+                      ),
                     )
                   : const RotatedBox(
                       quarterTurns: 3,
