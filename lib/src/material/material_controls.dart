@@ -352,8 +352,8 @@ class _MaterialControlsState extends State<MaterialControls>
           child: Center(
             child: Icon(
               chewieController.isFullScreen
-                  ? Icons.fullscreen_exit
-                  : Icons.fullscreen,
+                  ? Icons.close_fullscreen_sharp
+                  : Icons.open_in_full,
               color: Colors.white,
             ),
           ),
