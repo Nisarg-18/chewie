@@ -271,13 +271,37 @@ class _MaterialControlsState extends State<MaterialControls>
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    if (chewieController.isLive)
-                      const Expanded(child: Text('LIVE'))
-                    else
-                      _buildPosition(iconColor),
+                    // if (chewieController.isLive)
+                    //   const Expanded(child: Text('LIVE'))
+                    // else
+                    //final position = _latestValue.position;
+                    // final duration = _latestValue.duration;
+                    Text(
+                      '${formatDuration(_latestValue.position)}   ',
+                      style: const TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                    // _buildPosition(iconColor),
+                    if (!chewieController.isLive)
+                      Expanded(
+                        child: Container(
+                          padding: const EdgeInsets.only(right: 20),
+                          child: Row(
+                            children: [
+                              _buildProgressBar(),
+                            ],
+                          ),
+                        ),
+                      ),
+                    Text(
+                      formatDuration(_latestValue.duration),
+                      style: const TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
                     if (chewieController.allowMuting)
                       _buildMuteButton(controller),
-                    const Spacer(),
                     if (chewieController.allowFullScreen) _buildExpandButton(),
                   ],
                 ),
@@ -285,17 +309,6 @@ class _MaterialControlsState extends State<MaterialControls>
               SizedBox(
                 height: chewieController.isFullScreen ? 15.0 : 0,
               ),
-              if (!chewieController.isLive)
-                Expanded(
-                  child: Container(
-                    padding: const EdgeInsets.only(right: 20),
-                    child: Row(
-                      children: [
-                        _buildProgressBar(),
-                      ],
-                    ),
-                  ),
-                ),
             ],
           ),
         ),
@@ -350,13 +363,18 @@ class _MaterialControlsState extends State<MaterialControls>
             right: 8.0,
           ),
           child: Center(
-            child: Icon(
-              chewieController.isFullScreen
-                  ? Icons.close_fullscreen_sharp
-                  : Icons.open_in_full,
-              color: Colors.white,
-            ),
-          ),
+              child: chewieController.isFullScreen
+                  ? const Icon(
+                      Icons.close_fullscreen_sharp,
+                      color: Colors.white,
+                    )
+                  : const RotatedBox(
+                      quarterTurns: 3,
+                      child: Icon(
+                        Icons.open_in_full,
+                        color: Colors.white,
+                      ),
+                    )),
         ),
       ),
     );
